@@ -1,0 +1,17 @@
+Problem: Given a number, N. Find the sum of all the digits of N
+
+class Solution{
+    static int sumOfDigits(int N) {
+        // code here
+        int sum=0;
+        while(N>0)
+        {
+            sum = sum + N%10;
+            N/=10;
+        }
+        return sum;
+    }
+}
+
+
+GFG
