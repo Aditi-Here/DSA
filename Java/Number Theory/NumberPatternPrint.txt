@@ -1,0 +1,51 @@
+package Math;
+import java.util.Scanner;
+public class PrintPattern {
+program to print number pattern with 1, 0 at alternate rows
+
+	Example
+
+Input
+
+Input rows: 5
+Input columns: 5
+Output
+
+11111
+00000
+11111
+00000
+11111
+
+https://codeforwin.org/c-programming/c-program-to-print-number-pattern-with-0-1-at-alternate-rows
+
+
+-----------------------------------------------------------------------------
+public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		int row = sc.nextInt();
+		int N =row;
+		for(int i=0; i<N; i++)
+		{
+			if(i%2==0)
+			{
+				System.out.println();
+				for(int j =0; j<row;j++)
+				   System.out.print("1");
+					
+			}
+			else {
+				System.out.println();
+				for(int j =0; j<row;j++)
+				{
+					System.out.print("0");
+					
+				}
+			}
+			
+		}
+		
+	}
+
+}
