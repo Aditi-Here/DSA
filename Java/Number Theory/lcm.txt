@@ -1,0 +1,9 @@
+public int lcm(int n, int m)
+	{
+		int min = (n>m)?m:n;
+		int max=(n<m)?m:n;
+		for(int i=max;;i+=max)
+		{
+			if(i%min==0) return i;
+		}
+	}

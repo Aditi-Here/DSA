@@ -1,0 +1,32 @@
+package Arrays;
+
+import java.util.Scanner;
+
+public class LeftRotateArraybyKPosition {
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the size of the array");
+		int N = sc.nextInt();
+		int arr[] = new int[N];
+		System.out.println("Enter the Array");
+		for(int i=0; i<N;i++)
+		{
+			arr[i] = sc.nextInt();
+		}
+		System.out.println("Enter K value");
+		int k = sc.nextInt();
+		int p=0;
+		int arr_new[] = new int[N];
+		for(int j=0; j<N; j++) {
+			if(j>=(N-k))
+				{
+					arr_new[j]=arr[p];
+					p+=1;
+				}
+			else {
+			arr_new[j]=arr[k+j];
+			}
+			System.out.print(arr_new[j]+" ");
+		}
+	}
