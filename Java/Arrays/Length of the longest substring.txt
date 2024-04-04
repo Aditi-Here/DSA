@@ -1,0 +1,76 @@
+Length of the longest substring
+
+Given a string S, find the length of the longest substring without repeating characters.
+
+
+Example 1:
+
+Input:
+S = "geeksforgeeks"
+Output:
+7
+Explanation:
+Longest substring is
+"eksforg".
+Example 2:
+
+Input:
+S = "abdefgabef"
+Output:
+6
+Explanation:
+Longest substring are
+"abdefg" , "bdefga" and "defgab".
+ 
+
+Your Task:
+You don't need to take input or print anything. Your task is to complete the function longestUniqueSubsttr() which takes a string S as and returns the length of the longest substring.
+
+ 
+
+Expected Time Complexity: O(|S|).
+Expected Auxiliary Space: O(K) where K is constant.
+
+
+Constraints:
+1 ≤ |S| ≤ 105
+It is guaranteed that all characters of the String S will be lowercase letters from 'a' to 'z'
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Question Link: https://www.geeksforgeeks.org/problems/length-of-the-longest-substring3036/1
+
+Time Complexity: O(n)
+Space Complexity O(26) ~ O(1)
+*/
+
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+		String s = sc.next();
+		Solution obj = new Solution();
+		System.out.print(obj.longestUniqueSubsttr(s));
+    }
+}
+
+class Solution{
+    int longestUniqueSubsttr(String S){
+        int n = S.length();
+		int ans = 1;
+		int i = 0;
+		int j = 0;
+		int[] freq = new int[26];
+		freq[S.charAt(0)-'a']++;
+		while(j<n-1) {
+			j++;
+			freq[S.charAt(j)-'a']++;
+			while(freq[S.charAt(j)-'a']==2) {
+				freq[S.charAt(i)-'a']--;
+				i++;
+			}
+			ans = Math.max(ans, j-i+1);
+		}
+		return ans;
+    }
+}
