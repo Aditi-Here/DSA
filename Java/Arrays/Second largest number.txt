@@ -3,6 +3,7 @@ import java.util.*;
 public class SecondLargestElement {
 	public static void main(String[] args)
 	{
+		// Take input array
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the size of the array");
 		int N = sc.nextInt();
@@ -13,8 +14,11 @@ public class SecondLargestElement {
 		{
 			arr[i] = sc.nextInt();
 		}
+		// Actual Problem Start here
+
 		int max = Integer.MIN_VALUE;
 		int sec = Integer.MIN_VALUE;
+
 		for(int i:arr)
 		{
 			if(i>max) {
