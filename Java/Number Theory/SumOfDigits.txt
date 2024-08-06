@@ -1,5 +1,8 @@
 Problem: Given a number, N. Find the sum of all the digits of N
 
+https://www.geeksforgeeks.org/problems/sum-of-digits1742/1
+
+
 class Solution{
     static int sumOfDigits(int N) {
         // code here
