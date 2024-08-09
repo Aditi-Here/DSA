@@ -1,0 +1,95 @@
+Shortest Unsorted Continuous Subarray
+
+Given an integer array nums, you need to find one continuous subarray such that if you only sort this subarray in non-decreasing order, then the whole array will be sorted in non-decreasing order.
+
+Return the shortest such subarray and output its length.
+
+Example 1:
+
+Input: nums = [2,6,4,8,10,9,15]
+Output: 5
+Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
+Example 2:
+
+Input: nums = [1,2,3,4]
+Output: 0
+Example 3:
+
+Input: nums = [1]
+Output: 0
+ 
+
+Constraints:
+
+1 <= nums.length <= 104
+-105 <= nums[i] <= 105
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Solution {
+    public int findUnsortedSubarray(int[] nums) {
+        int []sortedNums = new int[nums.length];
+        for(int i = 0; i < nums.length ; i++){
+            sortedNums[i] = nums[i];
+        }
+        Arrays.sort(sortedNums);
+        for(int i = 0; i < nums.length ; i++){
+            System.out.println(sortedNums[i]);
+        }
+        int e = -2 , s = -1;
+        for(int i = 0 ; i < nums.length ; i++){
+            if(sortedNums[i] != nums[i]){
+                if(s == -1) s = i;
+                else e = i; 
+            }
+        }
+        return e - s  + 1;
+    }
+}
+
+// ***************Better Approach******************************
+
+// Time: O(N^2)
+// Space: O(1)
+
+class Solution {
+    public int findUnsortedSubarray(int[] nums) {
+
+        int n = nums.length;
+
+        boolean pre[] = new boolean[n];
+        boolean suf[] = new boolean[n];
+
+        pre[0] = true;
+        for(int i = 1; i < n; ++i)
+            pre[i] = pre[i-1] && (nums[i] >= nums[i-1]);
+
+        suf[n - 1] = true;
+        for(int i = n - 2; i >= 0; --i)
+            suf[i] = suf[i+1] && (nums[i] <= nums[i+1]);
+
+        // Check for different subarrays now
+        int ans = n;
+        for(int i = 0; i < n; ++i) {
+            int max_val = Integer.MIN_VALUE;
+            int min_val = Integer.MAX_VALUE;
+            for(int j = i; j < n; ++j) {
+                max_val = Math.max(max_val, nums[j]);
+                min_val = Math.min(min_val, nums[j]);
+
+                boolean canSort = true;
+
+                if(i > 0 && (pre[i-1] == false || min_val < nums[i-1]))
+                    canSort = false;
+                
+                if(j < n - 1 && (suf[j+1] == false || max_val > nums[j+1]))
+                    canSort = false;
+
+                if(canSort) 
+                    ans = Math.min(ans, j - i + 1);
+            }
+        }
+
+        return ans == 1? 0 : ans;
+    }
+}
