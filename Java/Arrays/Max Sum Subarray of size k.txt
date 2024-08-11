@@ -33,6 +33,7 @@ Expected Auxiliary Space: O(1)
 
 Constraints:
 1 <= N <= 105
+
 1 <= Arri <= 105
 
 https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
@@ -40,6 +41,12 @@ https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
 
 ************* Sliding Window *********************
 ------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+O(N) time complexity
+
 class Solution{
     static long maximumSumSubarray(int K, ArrayList<Integer> Arr,int N){
         // code here
