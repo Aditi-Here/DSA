@@ -1,0 +1,22 @@
+import java.util.Arrays;
+import java.util.*;
+
+public class DuplicateElementsInArray {
+    static List<Integer> duplicateEle(int[] arr){
+        HashSet<Integer> store = new HashSet<>();
+        ArrayList<Integer> output = new ArrayList<>();
+        for(int i= 0; i < arr.length ; i++){
+            int cur = arr[i];
+            if(store.contains(cur)) output.add(cur);
+            else store.add(cur);
+        }
+        return output;
+    }
+    public static void main(String[] args) {
+        int arr[] = {2, 10,10, 100, 2, 10, 11,2,11,2};
+        List li = duplicateEle(arr);
+        for(int i = 0; i < li.size(); i++){
+            System.out.print(li.get(i)+" ");
+        }
+    }
+}
