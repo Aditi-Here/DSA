@@ -36,7 +36,17 @@ sum(words[i].length) <= 3 * 105
 0 <= li <= ri < words.length
 
 https://leetcode.com/problems/count-vowel-strings-in-ranges/description/
--------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+Approach-
+	We can convert this problem to prefix sum range query.
+	If we have a word which have first and last letter as vowel then assign it to 1 otherwise 0.
+	Now take prefix sum and and answer the query in o(1).
+
+	TC-> O(N+M) N->array length and M->query array length
+	SC-> O(N)
+
+*/
+
 class Solution {
     public boolean isVowel(char x) {
         return x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u';

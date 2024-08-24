@@ -65,3 +65,31 @@ class Solution {
         return result;
     }
 }
+
+/*
+
+A better approach we don't need to create two array take pointer for positive and negative element .
+Since  postive element is equal to negative element so in a while loop search for 
+positive and negative element and then push these to answer .
+TC->O(N)
+SC->O(1) --> for answer and input array
+*/
+
+
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int i = 0, j = 0;
+        int[] result = new int[nums.length];
+        int k = 0;
+        while (k < nums.length) {
+            while (nums[i] < 0)
+                i++;
+            while (nums[j] > 0)
+                j++;
+            result[k++] = nums[i++];
+            result[k++] = nums[j++];
+        }
+
+        return result;
+    }
+}
