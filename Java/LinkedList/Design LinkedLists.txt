@@ -16,7 +16,7 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
 
 https://leetcode.com/problems/design-linked-list/description/
 
--------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 
 class Node{
 	int data;

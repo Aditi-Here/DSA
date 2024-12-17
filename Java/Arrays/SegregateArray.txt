@@ -36,7 +36,7 @@ public class SegregatesEvenOdd {
         }
         return arr;
     }
-
+-------------------------------------------------------------------------------------
 	static int[] SagregateBetterApproach(int[] arr){
         int n = arr.length;
         int left = 0;

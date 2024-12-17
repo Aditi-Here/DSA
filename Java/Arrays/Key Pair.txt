@@ -28,7 +28,40 @@ Constraints:
 
 https://www.geeksforgeeks.org/problems/key-pair5616/1
 
-------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+time complexity : O(n^2)
+
+class Solution {
+    boolean hasArrayTwoCandidates(int arr[], int n, int x) {
+        // code here
+        
+        for(int i = 0 ; i < n ; ++i){
+            for(int j = i+1 ; j < n ;++j){
+                int c = arr[i] + arr[j];
+                if(c == x) return true;
+            }
+        }
+        return false;
+    }
+}
+
+///**************Better Approach*************
+Time Complexity : O(n)
+
+class Solution {
+    boolean hasArrayTwoCandidates(int arr[], int n, int x) {
+        // code here
+        boolean found[] = new boolean[100001];
+        
+        for(int i = 0; i < n; ++i) {
+            int req_num = x - arr[i];
+            if(req_num >= 1 && req_num <= 100000 && found[req_num])
+                return true;
+            found[arr[i]] = true;
+        }
+        return false;
+    }
+}
 
 
 

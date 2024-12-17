@@ -1,0 +1,82 @@
+Pascal Triangle
+Difficulty: Medium
+Given a positive integer n, return the nth row of pascal's triangle.
+Pascal's triangle is a triangular array of the binomial coefficients formed by summing up the elements of previous row.
+
+
+Examples:
+
+Input: n = 4
+Output: [1, 3, 3, 1]
+Explanation: 4th row of pascal's triangle is {1, 3, 3, 1}.
+Input: n = 5
+Output: [1, 4, 6, 4, 1]
+Explanation: 5th row of pascal's triangle is {1, 4, 6, 4, 1}.
+Input: n = 1
+Output: [1]
+Explanation: 1st row of pascal's triangle is {1}.
+Constraints:
+1 ≤ n ≤ 20
+https://www.geeksforgeeks.org/problems/pascal-triangle0652/1
+--------------------------------------------------------------------------------------
+
+class Solution {
+    
+    ArrayList<Integer> rec(int n){
+        //base case
+        if(n == 1){
+            ArrayList<Integer> baseArray = new ArrayList<>();
+            baseArray.add(1);
+            return baseArray;
+        }
+        ArrayList<Integer> preArray = rec(n-1);
+        ArrayList<Integer> curArray = new ArrayList<>();
+        curArray.add(1);
+        for(int i = 1; i < n-1 ; i++){
+            curArray.add(preArray.get(i-1)+preArray.get(i));
+        }
+        curArray.add(1);
+        return curArray;
+    }
+    ArrayList<Integer> nthRowOfPascalTriangle(int n) {
+        // code here
+        return rec(n);
+    }
+}
+
+Learnyard Approach
+
+class Solution {
+    final int mod = 1000000007;
+
+    ArrayList<Long> rec(int n) {
+		// base case
+        if (n == 1) {
+            ArrayList<Long> baseCase = new ArrayList<>();
+            baseCase.add(1L);
+            return baseCase;
+        }
+        // it will give prev row
+        ArrayList<Long> prevRow = rec(n - 1);
+
+        ArrayList<Long> currRow = new ArrayList<>();
+        
+        // first element of any row would be always 1
+        currRow.add((1L));
+
+        for (int i = 1; i < n - 1; i++) {
+			//current element is the sum of the element present at the same i and element present at i-1 in prevRow
+            currRow.add((prevRow.get(i - 1) + prevRow.get(i)) % mod);
+        }
+		//last element of any row would be always 1
+		currRow.add((1L));
+
+        return currRow;
+    }
+
+    ArrayList<Long> nthRowOfPascalTriangle(int n) {
+        ArrayList<Long> result = rec(n);
+        return result;
+    }
+    
+}
