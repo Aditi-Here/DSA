@@ -1,0 +1,20 @@
+Search a node in binary tree
+
+
+---------------------------------------------------------------------------
+
+public class TreeNode{
+
+	int val;
+	TreeNode left, right;
+}
+
+public boolean searchNode(TreeNode root, int key){
+	if(root == null) return false;
+	if(root.val == key) return true;
+	if(root.val > key){
+		searchNode(rootleft, key);}
+	if(root.val < key){
+		searchNode(root.right, key);
+	return false;
+}
