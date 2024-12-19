@@ -1,0 +1,26 @@
+Balanced Binary Tree
+
+https://leetcode.com/problems/balanced-binary-tree/
+https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
+-----------------------------------------------------------------------------------
+class Solution {
+    Pair<Integer, Boolean> getHeightAndBal(TreeNode cur) {
+        if(cur == null) 
+            return new Pair<>(0, true);
+
+        Pair<Integer, Boolean> left = getHeightAndBal(cur.left);
+        Pair<Integer, Boolean> right = getHeightAndBal(cur.right);
+
+        int curHeight = 1 + Math.max(left.getKey(), right.getKey());
+        boolean curBal = (left.getValue() == true && 
+                            right.getValue() == true && 
+                            Math.abs(left.getKey() - right.getKey()) <= 1)? 
+                            true : false;
+
+        return new Pair<>(curHeight, curBal);
+    }
+    public boolean isBalanced(TreeNode root) {
+        Pair<Integer, Boolean> ans = getHeightAndBal(root);
+        return ans.getValue();
+    }
+}
