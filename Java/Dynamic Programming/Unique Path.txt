@@ -1,0 +1,39 @@
+
+
+https://leetcode.com/problems/unique-paths/
+
+Recursion:
+
+class Solution {
+    int uniquePathHelper(int i , int j, int m , int n){
+        if(i == m-1 && j == n-1) return 1;
+        if(i >= m || j >= n) return 0;
+        
+        int x = uniquePathHelper(i , j+1 , m , n);
+        int y = uniquePathHelper(i+1, j , m , n);
+         
+        return x + y;
+    }
+    public int uniquePaths(int m, int n) {
+        // int dp[][] = new int [m][n];
+        // Arrays.fill(dp,-1,-1);
+       
+        return uniquePathHelper(0 , 0 , m , n);
+    }
+}
+
+Dp
+// Link : https://leetcode.com/problems/unique-paths/
+// Time & Space : O(M*N)
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int dp[][] = new int[m][n];
+
+        for(int i = 0; i < m; ++i)
+            for(int j = 0; j < n; ++j)  
+                dp[i][j] = (i == 0 || j == 0)? 1 : dp[i-1][j] + dp[i][j-1];
+        
+        return dp[m-1][n-1];
+    }
+}

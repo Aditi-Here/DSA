@@ -1,0 +1,83 @@
+https://leetcode.com/problems/house-robber/description/
+
+
+---------------------------------------------------------------------
+Recurssion T(2^n)
+
+class Solution {
+    int robHelper(int[] nums, int i){
+        if(i >= nums.length) return 0;
+        int op1 = 0, op2 = 0;
+        // to take it
+        op1 += nums[i];
+        op1 += robHelper(nums, i+2);
+        // to leave it
+        op2 += robHelper(nums, i+1);
+        return Math.max(op1, op2); 
+    }
+    public int rob(int[] nums) {   
+        return robHelper(nums , 0); 
+}
+}
+
+dp
+Top Down
+Time : O(N)
+// Space : O(N)
+
+class Solution {
+    int dp[];
+    int robHelper(int[] nums, int i, int[] dp){
+        if(i >= nums.length) return 0;
+        if(dp[i] != -1) return dp[i];
+        int op1 = 0, op2 = 0;
+        // to take it
+        op1 += nums[i];
+        op1 += robHelper(nums, i+2,dp);
+        // to leave it
+        op2 += robHelper(nums, i+1, dp);
+        return dp[i] = Math.max(op1, op2); 
+    }
+    public int rob(int[] nums) { 
+        int []dp = new int[nums.length + 2];
+        Arrays.fill(dp,-1);  
+        return robHelper(nums , 0, dp); 
+}
+}
+
+
+Note:   dp size can take n+1, but just for simplicity take n+2, even more size can also be fine, eg. n+9 etc.
+
+
+Bottom Up
+// Time : O(N)
+// Space : O(N)
+
+class Solution { // bottom up
+    public int rob(int[] nums) {
+        if(nums.length == 0)
+            return 0;
+        if(nums.length == 1)
+            return nums[0];
+    
+        // dp[n] represents answer for the first
+        // n elements i.e. index range [0, n - 1]
+        int dp[] = new int[nums.length+1];
+
+        dp[1] = nums[0];
+        dp[2] = Math.max(nums[0], nums[1]);
+
+        for(int n = 3; n <= nums.length; ++n) {
+
+            // Let nums[n-1] be our last chosen house
+            int poss1 = nums[n-1] + dp[n-2];
+
+            // Let nums[n-2] be our last chosen house
+            int poss2 = nums[n-2] + dp[n-3];
+
+            dp[n] = Math.max(poss1, poss2);
+        }
+
+        return dp[nums.length];
+    }
+}
