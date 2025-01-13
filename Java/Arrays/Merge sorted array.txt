@@ -67,3 +67,28 @@ class Solution {
         }
     }
 }
+
+Another Approach
+
+class Solution {
+    public void merge(int[] arr1, int m, int[] arr2, int n) {
+        int i = m - 1; // Last element of arr1's valid part
+        int j = n - 1; // Last element of arr2
+        int k = m + n - 1; // Last position of arr1 (combined size)
+
+        // Merge in reverse order
+        while (i >= 0 && j >= 0) {
+            if (arr1[i] > arr2[j]) {
+                arr1[k--] = arr1[i--];
+            } else {
+                arr1[k--] = arr2[j--];
+            }
+        }
+        // If arr2 still has elements, add them
+        while (j >= 0) {
+            arr1[k--] = arr2[j--];
+        }
+    
+    }
+}
+S- O(n)

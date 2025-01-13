@@ -1,0 +1,53 @@
+https://leetcode.com/problems/longest-common-subsequence/
+-------------------------------------------------------------------------------------------------------------
+Recurion:
+
+class Solution {
+    public int longestCommonSubsequenceHelper(int i, int j, String text1, String text2) {
+        if(text1.length() == i || text2.length() == j) return 0;
+        if(text1.charAt(i) == text2.charAt(j)){
+            return 1 + longestCommonSubsequenceHelper(i+1, j+1, text1, text2);
+        }
+        else{
+            int op1, op2;
+            op1 = longestCommonSubsequenceHelper(i+1, j , text1, text2);
+            op2 = longestCommonSubsequenceHelper(i, j+1, text1, text2);
+            return Math.max(op1, op2);
+        }
+    }
+    public int longestCommonSubsequence(String text1, String text2){
+        return longestCommonSubsequenceHelper(0, 0, text1,  text2);
+    }
+}
+
+It gives time exceed error as we have calculated for op1 and op2, means same operation we performed repeatedly.
+
+--------------------------------------------------------------------------------------------------------------------
+Another better Approach:
+// Time & Space : O(Len1 * Len2)
+
+class Solution {
+    public int longestCommonSubsequenceHelper(int i, int j, String text1, String text2, int dp[][]) {
+        if(text1.length() == i || text2.length() == j) return 0;
+        if(dp[i][j] != -1) return dp[i][j];
+        if(text1.charAt(i) == text2.charAt(j)){
+            return dp[i][j] = 1 + longestCommonSubsequenceHelper(i+1, j+1, text1, text2,dp);
+        }
+        else{
+            int op1, op2;
+            op1 = longestCommonSubsequenceHelper(i+1, j , text1, text2, dp);
+            op2 = longestCommonSubsequenceHelper(i, j+1, text1, text2, dp);
+            return dp[i][j] = Math.max(op1, op2);
+        }
+    }
+    public int longestCommonSubsequence(String text1, String text2){
+        int[][] dp = new int[1001][1001];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+            }
+        return longestCommonSubsequenceHelper(0, 0, text1,  text2, dp);
+    }
+}
+
+here we have first check if equals, if not equals than increase with text1 as op1 or with text2 as op2 and which is max take this.
+
