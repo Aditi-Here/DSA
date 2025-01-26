@@ -1,0 +1,43 @@
+
+
+O(n^2) Time and O(1) Space
+// Java Program to solve stock buy and sell by  
+// exploring all possible pairs
+
+class GfG {
+
+    static int maxProfit(int[] prices) {
+        int n = prices.length;
+        int res = 0;
+
+        // Explore all possible ways to buy and sell stock
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                res = Math.max(res, prices[j] - prices[i]);
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] prices = {7, 10, 1, 3, 6, 9, 2};
+        System.out.println(maxProfit(prices));
+    }
+}
+
+
+Another:
+O(n) Time and O(1) Space
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        int maxProfit = 0;
+        int minPrice = prices[0];
+        for(int pri: prices){
+            maxProfit = Math.max(maxProfit , pri - minPrice);
+            minPrice = Math.min(minPrice ,pri);
+        }
+        return maxProfit;
+    }
+}
+
