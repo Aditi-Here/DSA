@@ -1,0 +1,43 @@
+/*
+Q3 - Minimum Average Difference
+Question Link - https://leetcode.com/problems/minimum-average-difference/description/
+Time Complexity - O(n+n) ~ O(n)
+Space Complexity - O(n+1) ~ O(n) 
+*/
+
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int[] nums = new int[n];
+		for(int i=0 ; i<n ; i++) {
+			nums[i] = sc.nextInt();
+		}
+		Solution obj = new Solution();
+		System.out.println(obj.minimumAverageDifference(nums));
+    }
+}
+
+class Solution {
+    public int minimumAverageDifference(int[] nums) {
+        int n = nums.length;
+		long[] pre = new long[n+1];
+		for(int i=0 ; i<n ; i++) 
+			pre[i+1] = pre[i] + nums[i];
+		int ansIdx = -1;
+		long minDiff = Long.MAX_VALUE;
+		for(int i=0 ; i<n ; i++) {
+			long l = pre[i+1]/(i+1);
+			long r = 0;
+			if(i<n-1) r = (pre[n] - pre[i+1])/(n-i-1);
+			long currDiff = Math.abs(l-r);
+			if(currDiff < minDiff) {
+				minDiff = currDiff;
+				ansIdx = i;
+			}
+		}
+		return ansIdx;
+    }
+}

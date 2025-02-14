@@ -1,0 +1,109 @@
+Length of the longest substring
+Given a string s, find the length of the longest substring without repeating characters.
+
+Examples:
+
+Input: s = "geeksforgeeks"
+Output: 7
+Explanation: Longest substring is "eksforg".
+Input: s = "abdefgabef"
+Output: 6
+Explanation: Longest substring are "abdefg" , "bdefga" and "defgab".
+Input: s = "aaaaa"
+Output: 1
+Explanation: Longest substring is "a".
+Constraints:
+1 ≤ s.size() ≤ 105
+It is guaranteed that all characters of the String s will be lowercase letters from 'a' to 'z'
+
+https://www.geeksforgeeks.org/problems/length-of-the-longest-substring3036/1
+-------------------------------------------------------------------------------------------------
+Approach 1: 
+
+// Java program to find the length of the longest 
+// substring without repeating characters
+
+import java.util.*;
+
+class GfG {
+    static final int MAX_CHAR = 26;
+    static int longestUniqueSubstr(String s) {
+        int n = s.length();
+        int res = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            // Initializing all characters as not visited
+            boolean[] vis = new boolean[MAX_CHAR];
+
+            for (int j = i; j < n; j++) {
+
+                // If current character is visited
+                // Break the loop
+                if (vis[s.charAt(j) - 'a'] == true)
+                    break;
+
+                // Else update the result if this window is larger,
+                // and mark current character as visited.
+                else {
+                    res = Math.max(res, j - i + 1);
+                    vis[s.charAt(j) - 'a'] = true;
+                }
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        String s = "geeksforgeeks";
+        System.out.println(longestUniqueSubstr(s));
+    }
+}
+
+Time Complexity: O(n*MAX_CHAR), the outer loop runs O(n) time, and the inner loop runs in O(MAX_CHAR) in the worst case (considering all unique characters), resulting in a total time complexity of O(n * MAX_CHAR).
+Auxiliary Space: O(MAX_CHAR).
+
+Approach 2 :
+// Java code to find the largest substring with non-repeating 
+// characters using Sliding Window
+
+class GfG {
+    static final int MAX_CHAR = 26;
+    static int longestUniqueSubstr(String s) {
+        if (s.length() == 0 || s.length() == 1)
+            return s.length();
+
+        int res = 0;
+        boolean[] vis = new boolean[MAX_CHAR];
+
+        // left and right pointer of sliding window
+        int left = 0, right = 0;
+        while (right < s.length()) {
+
+            // If character is repeated, move left pointer marking
+            // visited characters as false until the repeating 
+            // character is no longer part of the current window
+            while (vis[s.charAt(right) - 'a'] == true) {
+                vis[s.charAt(left) - 'a'] = false;
+                left++;
+            }
+
+            vis[s.charAt(right) - 'a'] = true;
+
+            // The length of the current window (right - left + 1)
+            // is calculated and answer is updated accordingly.
+            res = Math.max(res, (right - left + 1));
+            right++;
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        String s = "geeksforgeeks";
+        System.out.println(longestUniqueSubstr(s));
+    }
+}
+
+Time Complexity: O(n), since each character is processed by the left and right pointers exactly once.
+Auxiliary Space: O(MAX_CHAR), MAX_CHAR = 26 as the input string can have only lowercase letters.
+

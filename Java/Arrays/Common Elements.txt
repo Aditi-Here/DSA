@@ -12,7 +12,12 @@ Output: 20 80
 Explanation: 20 and 80 are the only
 common elements in A, B and C.
  
-
+Input: arr1 = [1, 2, 3, 4, 5] , arr2 = [6, 7] , arr3 = [8,9,10]
+Output: [-1]
+Explanation: There are no common elements in arr, brr and crr.
+Input: arr1 = [1, 1, 1, 2, 2, 2], B = [1, 1, 2, 2, 2], arr3 = [1, 1, 1, 1, 2, 2, 2, 2]
+Output: [1, 2]
+Explanation: We do not need to consider duplicates
 Your Task:  
 You don't need to read input or print anything. Your task is to complete the function commonElements() which take the 3 arrays A[], B[], C[] and their respective sizes n1, n2 and n3 as inputs and returns an array containing the common element present in all the 3 arrays in sorted order. 
 If there are no such elements return an empty array. In this case the output will be printed as -1.

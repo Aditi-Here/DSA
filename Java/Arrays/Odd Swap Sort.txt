@@ -1,0 +1,55 @@
+https://codeforces.com/problemset/problem/1638/B
+
+/*
+The condition "ai+ai+1
+ is odd" means that we can only swap elements of different parity. If either the order of even elements or the order of odd elements is not non-decreasing, then it is impossible to sort the sequence. Otherwise, let's prove that it is always possible to sort the sequence. We can for example perform Bubble Sort algorithm. Note that this algorithm only swaps elements ai
+ and ai+1
+ if ai>ai+1
+, so it will never swap two elements of the same parity (given our assumption on their order).
+*/
+import java.util.*;
+
+public class Main {
+    public static void solve() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+
+        List<Integer> odd = new ArrayList<>();
+        List<Integer> even = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int x = scanner.nextInt();
+            if (x % 2 == 1) {
+                odd.add(x);
+            } else {
+                even.add(x);
+            }
+        }
+
+        Collections.sort(odd);
+        Collections.sort(even);
+
+        if (isSorted(odd) && isSorted(even)) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+
+    public static boolean isSorted(List<Integer> list) {
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i) < list.get(i - 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int t = scanner.nextInt();
+
+        while (t-- > 0) {
+            solve();
+        }
+    }
+}

@@ -1,0 +1,42 @@
+/*
+Q2 - Smallest Range I
+Question Link - https://leetcode.com/problems/smallest-range-i/description/
+Time Complexity - O(n+n) ~ O(n)
+Space Complexity - O(1) (ignoring the space occupied by the input array) 
+*/
+
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int k = sc.nextInt();
+		int[] nums = new int[n];
+		for(int i=0 ; i<n ; i++) {
+			nums[i] = sc.nextInt();
+		}
+		Solution obj = new Solution();
+		System.out.println(obj.smallestRangeI(nums, k));
+    }
+}
+
+class Solution {
+    public int smallestRangeI(int[] nums, int k) {
+        int n = nums.length;
+        int maxEle = Integer.MIN_VALUE;
+        int minEle = Integer.MAX_VALUE;
+		for(int i=0 ; i<n ; i++) {
+			maxEle = Math.max(maxEle, nums[i]);
+			minEle = Math.min(minEle, nums[i]);
+		}
+		if(maxEle - minEle <= 2*k) {
+			// it is possible to make every element equal
+			return 0;
+		} else {
+			// it is possible to change every element to
+			// an integer in the range [minEle+k, maxEle-k] 
+			return (maxEle - minEle - 2*k); 
+		}
+    }
+}
