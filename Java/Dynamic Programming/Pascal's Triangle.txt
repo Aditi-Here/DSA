@@ -1,0 +1,25 @@
+https://leetcode.com/problems/pascals-triangle/description/?envType=problem-list-v2&envId=dynamic-programming 
+
+-----------------------------------------------------------------------------------------
+
+Brute Force Approach---This is also DP-
+TC: O(N^2)
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+        for(int i =0; i < numRows; i++){
+            List<Integer> output = new ArrayList<>();
+            for(int j = 0; j <= i; j++){
+                if(j == 0 || j == i){
+                    output.add(1);
+                }
+                else
+                    output.add(result.get(i-1).get(j) + result.get(i-1).get(j-1));
+            }
+            result.add(output);
+        }
+        return result;
+    }
+}
+

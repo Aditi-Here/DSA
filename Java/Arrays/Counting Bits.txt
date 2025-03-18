@@ -1,0 +1,22 @@
+https://leetcode.com/problems/counting-bits/?envType=problem-list-v2&envId=dynamic-programming
+
+TC: O(N^2)
+
+class Solution {
+    int countOne(String s){
+        int count=0;
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) =='1')
+                count++;
+        }
+        return count;
+    }
+    public int[] countBits(int n) {
+        int ans[] = new int[n+1];
+        for(int i = 0; i <= n; i++){
+            String bin = Integer.toBinaryString(i);
+            ans[i] = countOne(bin);
+        }
+        return ans;
+    }
+}
